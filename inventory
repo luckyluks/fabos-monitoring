@@ -1,0 +1,14 @@
+#[all]
+#ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+#host_key_checking=False
+
+[monitoring]
+192.168.153.53 ansible_user=pi ansible_ssh_pass=612506 asset_id=asfasfasf-asfsaf-asfasf
+192.168.153.54 ansible_user=pi ansible_ssh_pass=612506
+192.168.153.55 ansible_user=pi ansible_ssh_pass=612506
+
+[insecuressh:children]
+monitoring
+
+[insecuressh:vars]
+ansible_ssh_common_args='-o StrictHostKeyChecking=no'
