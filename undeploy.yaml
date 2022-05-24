@@ -1,12 +1,13 @@
-- hosts: localhost
-  connection: local
-  vars:
-    - ansible_python_interpreter: /home/lur/miniconda3/envs/ansible/bin/python3
+- hosts: monitoring
+  become: true
+#  connection: local
+#  vars:
+#    - ansible_python_interpreter: /home/lur/miniconda3/envs/ansible/bin/python3
   tasks:
     - include_role:
         name: fabos-slm-monitoring
         tasks_from: destroy.yml
       vars:
-        - host_registry_fqdn: "lur-linux-f50fdc7c.lur.svc.fortknox.local"
-        - host_localhost_fqdn: "wx510029.ipa.stuttgart"
-        - asset_id: "defaultID"
+        - host_registry_fqdn: "{{ hostvars[inventory_hostname]['registry_host'] }}"
+        - host_localhost_fqdn: "{{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }}"
+        - asset_id: "{{ hostvars[inventory_hostname]['asset_id'] }}"

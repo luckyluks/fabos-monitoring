@@ -4,10 +4,20 @@
 #  vars:
 #    - ansible_python_interpreter: /home/lur/miniconda3/envs/ansible/bin/python3
   tasks:
-    - name: Install Docker
-      include_role:
-        name: "fabos.docker.setup"
-        tasks_from: install.yml
+    - name: Check if docker is installed
+      docker_host_info:
+      failed_when: false
+      register: docker_info
+
+    - name: Set 'docker_available'
+      set_fact:
+        docker_available: "{{ docker_info.can_talk_to_docker | default(true) }}"
+
+#    - name: Install Docker
+#      include_role:
+#        name: "fabos.docker.setup"
+#        tasks_from: install.yml
+#      when: not docker_available
 
 - hosts: monitoring
   become: true
@@ -17,6 +27,6 @@
         name: fabos-slm-monitoring
         tasks_from: create.yml
       vars:
-        - host_registry_fqdn: "192.168.153.47"
+        - host_registry_fqdn: "{{ hostvars[inventory_hostname]['registry_host'] }}"
         - host_localhost_fqdn: "{{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }}"
-        - asset_id: "{{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }}"
+        - asset_id: "{{ hostvars[inventory_hostname]['asset_id'] }}"

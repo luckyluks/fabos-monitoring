@@ -10,12 +10,23 @@ all:
         192.168.153.54:
           ansible_user: pi
           ansible_ssh_pass: 612506
+          asset_id: dgdfgdfg-dfgdfgdfg-dfgdfg
         192.168.153.55:
           ansible_user: pi
           ansible_ssh_pass: 612506
+          asset_id: erererer-erererer-erererer
+        192.168.153.56:
+          ansible_user: pi
+          ansible_ssh_pass: 612506
+          asset_id: uuziz-uuziz-uuziz
+        192.168.153.49:
+          ansible_user: root
+          ansible_ssh_pass: 612506
+          asset_id: siemens-dings
 
     insecuressh:
       children:
         monitoring:
       vars:
-        ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
+        ansible_ssh_common_args: "-o StrictHostKeyChecking=no"
+        registry_host: "192.168.153.47"
