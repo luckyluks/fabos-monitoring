@@ -1,7 +1,29 @@
 version: "3"
 services:
   registry:
-    container_name: registry_local
-    image: eclipsebasyx/aas-registry:1.0.4
+    # container_name: registry_local
+#    image: eclipsebasyx/aas-registry:1.1.0
+    image: fabos4ai/aas-registry:1.2.0-SNAPSHOT
     ports:
       - 4000:4000
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    links:
+      - mongodb
+    volumes:
+      - "./registry.properties:/usr/share/config/registry.properties"
+      - "./mongodb.properties:/usr/share/config/mongodb.properties"
+
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    # environment:
+    #   MONGO_INITDB_ROOT_USERNAME: root
+    #   MONGO_INITDB_ROOT_PASSWORD: example
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongo mongodb:27017/test --quiet
+      interval: 3s
+      timeout: 3s
+      retries: 5
