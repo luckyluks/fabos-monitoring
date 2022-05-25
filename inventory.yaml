@@ -6,23 +6,23 @@ all:
         192.168.153.53:
           ansible_user: pi
           ansible_ssh_pass: 612506
-          asset_id: asfasfasf-asfsaf-asfasf
+          asset_id: 976a9056-9a98-4783-917f-f36de094b266
         192.168.153.54:
           ansible_user: pi
           ansible_ssh_pass: 612506
-          asset_id: dgdfgdfg-dfgdfgdfg-dfgdfg
+          asset_id: a2a00bcc-12dc-40ad-803f-de47cfcce9bb
         192.168.153.55:
           ansible_user: pi
           ansible_ssh_pass: 612506
-          asset_id: erererer-erererer-erererer
+          asset_id: c93ca4f7-beae-4ab9-8823-b92f60a0b395
         192.168.153.56:
           ansible_user: pi
           ansible_ssh_pass: 612506
-          asset_id: uuziz-uuziz-uuziz
+          asset_id: a3fccdac-af33-4f05-a0aa-555afdabb14b
         192.168.153.49:
           ansible_user: root
           ansible_ssh_pass: 612506
-          asset_id: siemens-dings
+          asset_id: 1d2a5e72-9252-4082-b57f-0c68797b631b
 
     insecuressh:
       children:
